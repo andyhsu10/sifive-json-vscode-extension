@@ -78,5 +78,6 @@ https://github.com/user-attachments/assets/e766df17-2e41-46bf-9d69-e0c52ddfeb1d
 
 1. [Your First Extension | Visual Studio Code Extension API](https://code.visualstudio.com/api/get-started/your-first-extension)
 2. [Contribution Points | Visual Studio Code Extension API](https://code.visualstudio.com/api/references/contribution-points#contributes.menus)
-3. [Modern VS Code extension development: The basics](https://snyk.io/blog/modern-vs-code-extension-development-basics/)
-4. [How to Make Your Own VS Code Extension](https://www.freecodecamp.org/news/making-vscode-extension/)
+3. [microsoft/vscode-extension-samples: Sample code illustrating the VS Code extension API.](https://github.com/microsoft/vscode-extension-samples/tree/main)
+4. [Modern VS Code extension development: The basics](https://snyk.io/blog/modern-vs-code-extension-development-basics/)
+5. [How to Make Your Own VS Code Extension](https://www.freecodecamp.org/news/making-vscode-extension/)
