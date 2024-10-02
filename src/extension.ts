@@ -16,17 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
         const document = editor.document;
         const text = document.getText();
         const filePath = document.fileName;
-        const fileExtension = path
-          .extname(filePath)
-          .toLowerCase()
-          .replace('.', '');
-        const languageId = JsonValidator.supportedFormat.includes(fileExtension)
-          ? fileExtension
-          : document.languageId;
 
         // Initialize a JsonValidator instance
         const validator = new JsonValidator();
-        validator.validate(text, languageId, filePath);
+        validator.validate(text, document.languageId, filePath);
       }
     },
   );
@@ -39,10 +32,15 @@ export function deactivate() {}
 
 // Declare a class for validating the JSON content
 class JsonValidator {
-  public static readonly supportedFormat = ['json', 'json5'];
+  public readonly supportedFormat = ['json', 'json5'];
 
-  public validate(text: string, languageId: string, filePath: string): void {
-    if (!JsonValidator.supportedFormat.includes(languageId)) {
+  public validate(text: string, docLangId: string, filePath: string): void {
+    const fileExtension = path.extname(filePath).toLowerCase().replace('.', '');
+    const languageId = this.supportedFormat.includes(fileExtension)
+      ? fileExtension
+      : docLangId;
+
+    if (!this.supportedFormat.includes(languageId)) {
       vscode.window.showErrorMessage(
         'This command is only available for JSON or JSON5 files.',
       );
