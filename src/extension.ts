@@ -1,4 +1,5 @@
-import * as path from 'path';
+import JSON5 from 'json5';
+import path from 'path';
 import * as vscode from 'vscode';
 
 // This method is called when your extension is activated
@@ -38,12 +39,12 @@ export function deactivate() {}
 
 // Declare a class for validating the JSON content
 class JsonValidator {
-  public static readonly supportedFormat = ['json'];
+  public static readonly supportedFormat = ['json', 'json5'];
 
   public validate(text: string, languageId: string, filePath: string): void {
     if (!JsonValidator.supportedFormat.includes(languageId)) {
       vscode.window.showErrorMessage(
-        'This command is only available for JSON files.',
+        'This command is only available for JSON or JSON5 files.',
       );
       return;
     }
@@ -56,6 +57,10 @@ class JsonValidator {
         case 'json':
           // Use standard JSON parser
           jsonContent = JSON.parse(text);
+          break;
+        case 'json5':
+          // Use JSON5 parser
+          jsonContent = JSON5.parse(text);
           break;
       }
 
