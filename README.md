@@ -62,6 +62,10 @@ To test and run the extension in Visual Studio Code:
    - If the JSON is invalid:
      - An error message will appear detailing the parsing error.
 
+## Demo
+
+https://github.com/user-attachments/assets/e766df17-2e41-46bf-9d69-e0c52ddfeb1d
+
 ## Future Improvements
 
 1. **Support for JSONC**: Extend validation support to include JSON with Comments (`.jsonc`) files.
