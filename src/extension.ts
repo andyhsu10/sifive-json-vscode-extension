@@ -1,9 +1,7 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+import * as path from 'path';
 import * as vscode from 'vscode';
 
 // This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
   console.log('Hello World from SiFive JSON!');
 
@@ -17,24 +15,17 @@ export function activate(context: vscode.ExtensionContext) {
         const document = editor.document;
         const text = document.getText();
         const filePath = document.fileName;
+        const fileExtension = path
+          .extname(filePath)
+          .toLowerCase()
+          .replace('.', '');
+        const languageId = JsonValidator.supportedFormat.includes(fileExtension)
+          ? fileExtension
+          : document.languageId;
 
-        try {
-          // Try to parse the JSON content
-          const jsonContent = JSON.parse(text);
-
-          // If parsing is successful, print key-value pairs to debug console
-          console.log(`Key-Value Pairs in ${filePath}:`);
-          for (const [key, value] of Object.entries(jsonContent)) {
-            console.log(`${key}: ${stringifyValue(value)}`);
-          }
-
-          vscode.window.showInformationMessage(
-            `✅ JSON is valid. Key-value pairs logged to debug console.`,
-          );
-        } catch (error) {
-          // If parsing fails, show an error message
-          vscode.window.showErrorMessage(`❌ Invalid JSON: ${error}`);
-        }
+        // Initialize a JsonValidator instance
+        const validator = new JsonValidator();
+        validator.validate(text, languageId, filePath);
       }
     },
   );
@@ -45,13 +36,55 @@ export function activate(context: vscode.ExtensionContext) {
 // This method is called when your extension is deactivated
 export function deactivate() {}
 
-function stringifyValue(value: any): string {
-  if (typeof value === 'object' && value !== null) {
-    // Convert object or array to a string with custom formatting
-    return JSON.stringify(value, null, 0)
-      .replace(/,/g, ', ')
-      .replace(/:/g, ': ');
+// Declare a class for validating the JSON content
+class JsonValidator {
+  public static readonly supportedFormat = ['json'];
+
+  public validate(text: string, languageId: string, filePath: string): void {
+    if (!JsonValidator.supportedFormat.includes(languageId)) {
+      vscode.window.showErrorMessage(
+        'This command is only available for JSON files.',
+      );
+      return;
+    }
+
+    try {
+      let jsonContent: any;
+
+      // Validate based on the languageId
+      switch (languageId) {
+        case 'json':
+          // Use standard JSON parser
+          jsonContent = JSON.parse(text);
+          break;
+      }
+
+      // print key-value pairs to debug console
+      console.log(`Key-Value Pairs in ${filePath}:`);
+      for (const [key, value] of Object.entries(jsonContent)) {
+        console.log(`${key}: ${this.stringifyValue(value)}`);
+      }
+
+      vscode.window.showInformationMessage(
+        `${languageId.toUpperCase()} is valid. Key-value pairs logged to debug console.`,
+      );
+    } catch (error: any) {
+      console.error(error);
+      vscode.window.showErrorMessage(
+        `Invalid ${languageId.toUpperCase()}: ${error.message}`,
+      );
+    }
   }
 
-  return String(value);
+  // stringify the value with whitespace in a line
+  private stringifyValue(value: any): string {
+    if (typeof value === 'object' && value !== null) {
+      // Convert object or array to a string with custom formatting
+      return JSON.stringify(value, null, 0)
+        .replace(/,/g, ', ')
+        .replace(/:/g, ': ');
+    }
+
+    return String(value);
+  }
 }
