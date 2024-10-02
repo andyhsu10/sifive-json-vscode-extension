@@ -1,6 +1,6 @@
 {
   "name": "sifive-json-vscode-extension",
-  "displayName": "sifive-json-vscode-extension",
+  "displayName": "SiFive JSON",
   "description": "An extension to validate JSON/JSON5 files and display key-value pairs",
   "version": "0.0.1",
   "engines": {
@@ -16,8 +16,21 @@
       {
         "command": "sifive-json-vscode-extension.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "sifive-json-vscode-extension.validateJson",
+        "title": "SiFive test"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "sifive-json-vscode-extension.validateJson",
+          "when": "resourceExtname =~ /\\.json5?$/i || editorLangId == json || editorLangId == json5",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
