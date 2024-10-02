@@ -63,9 +63,9 @@ class JsonValidator {
       }
 
       // print key-value pairs to debug console
-      console.log(`Key-Value Pairs in ${filePath}:`);
+      console.log(`\nKey-Value Pairs in ${filePath}:`);
       for (const [key, value] of Object.entries(jsonContent)) {
-        console.log(`${key}: ${this.stringifyValue(value)}`);
+        console.log(`．${key}: ${this.stringifyValue(value)}`);
       }
 
       vscode.window.showInformationMessage(

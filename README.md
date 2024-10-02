@@ -1,71 +1,78 @@
-# sifive-json-vscode-extension README
+# SiFive JSON
 
-This is the README for your extension "sifive-json-vscode-extension". After writing up a brief description, we recommend including the following sections.
+This is a VS Code extension that adds a "SiFive test" button to the right-click context menu when editing JSON and JSON5 files. This extension allows users to validate the content of their JSON and JSON5 files directly from the editor. If the content is valid, it prints the key-value pairs to the debug console; otherwise, it displays an error message indicating the issue.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Context Menu Integration**: Adds a `SiFive test` option to the right-click context menu for .json and .json5 files.
+- **JSON and JSON5 Support**: Validates both JSON and JSON5 file formats.
+- **Error Handling**: Displays error messages in a modal dialog if the content is invalid.
+- **Debug Logging**: Prints key-value pairs of valid JSON/JSON5 content to the debug console.
 
-For example if there is an image subfolder under your extension project workspace:
+## Prerequisites
 
-\!\[feature X\]\(images/feature-x.png\)
+- [Node.js and npm](https://nodejs.org/en): v20+ recommended
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [esbuild Problem Matchers (VS Code extension)](https://marketplace.visualstudio.com/items?itemName=connor4312.esbuild-problem-matchers): Allows you to see compilation errors directly in VS Code, facilitating easier debugging during development.
+- [JSON5 syntax (VS Code extension)](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-json5): (Optional) Adds syntax highlighting of JSON5 files in VS Code.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Setup
 
-## Requirements
+1. Clone the Repository
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+   ```bash
+   git clone https://github.com/andyhsu10/sifive-json-vscode-extension.git
+   cd sifive-json-vscode-extension
+   ```
 
-## Extension Settings
+2. Install Dependencies
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+   ```bash
+   npm install
+   ```
 
-For example:
+3. Compile the extension
 
-This extension contributes the following settings:
+   ```bash
+   npm run compile
+   ```
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
+## How to Run the Extension
 
-## Known Issues
+To test and run the extension in Visual Studio Code:
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. Open the Extension Project in VS Code
 
-## Release Notes
+   ```bash
+   code .
+   ```
 
-Users appreciate release notes as you update your extension.
+2. Start Debugging
 
-### 1.0.0
+   - Press `F5` to launch the extension in a new Extension Development Host window.
 
-Initial release of ...
+3. Test the Extension
 
-### 1.0.1
+   - In the new window, open or create a `.json` or `.json5` file. You can find some sample files under the folder `samples`.
+   - Right-click anywhere in the editor to bring up the context menu.
+   - Click on **SiFive test**.
+   - If the JSON is valid:
+     - An information message will appear: `JSON is valid. Key-value pairs logged to debug console.`
+     - Key-value pairs will be printed in the Debug Console.
+   - If the JSON is invalid:
+     - An error message will appear detailing the parsing error.
 
-Fixed issue #.
+## Future Improvements
 
-### 1.1.0
+1. **Support for JSONC**: Extend validation support to include JSON with Comments (`.jsonc`) files.
+2. **Error Highlighting**: Integrate with the editor to highlight the exact location of syntax errors within the JSON file.
+3. **Formatting Features**: Add options to format and beautify JSON content directly from the context menu.
+4. **Configuration Settings**: Allow users to customize extension behavior through VS Code settings, such as enabling/disabling certain features.
+5. **Performance Optimization**: Improve the parsing and validation performance for large JSON files.
 
-Added features X, Y, and Z.
+## References
 
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+1. [Your First Extension | Visual Studio Code Extension API](https://code.visualstudio.com/api/get-started/your-first-extension)
+2. [Contribution Points | Visual Studio Code Extension API](https://code.visualstudio.com/api/references/contribution-points#contributes.menus)
+3. [Modern VS Code extension development: The basics](https://snyk.io/blog/modern-vs-code-extension-development-basics/)
+4. [How to Make Your Own VS Code Extension](https://www.freecodecamp.org/news/making-vscode-extension/)

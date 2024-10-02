@@ -1,0 +1,100 @@
+// JSON5 Example demonstrating all JSON5 features
+
+/* Multi-line comment:
+   This JSON5 file includes examples of all the features
+   that JSON5 offers over standard JSON.
+*/
+
+{
+  // Unquoted property names (valid identifiers)
+  unquotedKey: 'Unquoted keys are allowed if they are valid identifiers',
+
+  // Unquoted property names (reserved words)
+  default: 'Reserved words can be used as unquoted keys',
+  class: 'Another reserved word as a key',
+
+  // Single-quoted strings
+  singleQuotes: 'Strings can be enclosed in single quotes',
+
+  // Strings with special characters and escapes
+  specialCharacters: 'Special characters: \b \f \n \r \t \v \0 \\ \' "',
+
+  // Multi-line strings using backslash at the end of line
+  multiLineString: 'This is a multi-line string \
+that uses a backslash at the end of the line',
+
+  // Trailing commas in objects
+  trailingCommaObject: {
+    a: 1,
+    b: 2,
+    c: 3, // Trailing comma is allowed
+  },
+
+  // Trailing commas in arrays
+  trailingCommaArray: [
+    'apple',
+    'banana',
+    'cherry', // Trailing comma is allowed
+  ],
+
+  // Numbers with leading decimal point
+  leadingDecimalPoint: 0.5, // Equivalent to 0.5
+
+  // Numbers with trailing decimal point
+  trailingDecimalPoint: 2, // Equivalent to 2.0
+
+  // Hexadecimal numbers
+  hexadecimalNumber: 0xff, // 255 in decimal
+
+  // Positive and negative Infinity
+  positiveInfinity: Infinity,
+  negativeInfinity: -Infinity,
+
+  // Not-a-Number (NaN)
+  notANumber: NaN,
+
+  // Additional escape sequences in strings
+  additionalEscapes: '\v \f \0 \u00A9 \u1F600', // Vertical tab, form feed, null character, ©, 😀
+
+  // Comments within arrays
+  arrayWithComments: [
+    // First element
+    1,
+    // Second element
+    2,
+    // Third element
+    3,
+  ],
+
+  // Objects with comments and unquoted keys
+  objectWithComments: {
+    // Key-value pair 1
+    foo: 'bar',
+    // Key-value pair 2
+    baz: 'qux',
+  },
+
+  // Duplicate keys (latest value takes precedence)
+  duplicateKey: 'First value',
+  duplicateKey: 'Second value', // This value overwrites the previous one
+
+  // Multi-line comments within objects
+  objectWithMultiLineComments: {
+    /* Multi-line comment inside an object
+       explaining that the following key is important */
+    importantKey: 'Important value',
+  },
+
+  // Property names with special characters (must be quoted)
+  'special-chars!@#$%^&*()': 'Keys with special characters must be quoted',
+
+  // Allowing Unicode characters in identifiers (keys)
+  café: 'Unicode characters in keys are allowed',
+
+  // Boolean values
+  isTrue: true,
+  isFalse: false,
+
+  // Null value
+  nothingHere: null,
+}
