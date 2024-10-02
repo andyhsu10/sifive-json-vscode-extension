@@ -1,6 +1,6 @@
 {
-  "name": "sifive-json-validator",
-  "displayName": "sifive-json-validator",
+  "name": "sifive-json-vscode-extension",
+  "displayName": "sifive-json-vscode-extension",
   "description": "An extension to validate JSON/JSON5 files and display key-value pairs",
   "version": "0.0.1",
   "engines": {
@@ -14,7 +14,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "sifive-json-validator.helloWorld",
+        "command": "sifive-json-vscode-extension.helloWorld",
         "title": "Hello World"
       }
     ]
